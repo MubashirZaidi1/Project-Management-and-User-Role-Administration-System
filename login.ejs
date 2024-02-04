@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /*                      ==================CSS==================                   */
+        body {
+          background-color: #f8f9fa;
+        }
+        .login-container {
+          max-width: 400px;
+          margin: 50px auto;
+          padding: 20px;
+          background-color: white;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+        }
+        .footer {
+          text-align: center;
+          padding: 15px;
+        }
+        .footer a {
+          color: #007bff;
+        }
+
+        .footer a:hover {               /*used to add hover effect to the baclground of the login card*/
+          color: #0056b3;
+        }
+        .search-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+        }
+        .search-container.active {
+          opacity: 1;
+          visibility: visible;
+        }
+        .search-container input {
+          width: 80%;
+          padding: 12px;
+          font-size: 18px;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.9);
+          transition: width 0.3s ease;
+        }
+        .search-container input:focus {
+          width: 100%;
+          outline: none;
+        }
+        .search-container button {
+          position: absolute;
+          right: 10%;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
+        .search-container button i {
+          font-size: 24px;
+          color: #333;
+        }
+
+    </style>
+</head>
+      <!--          ======================HTML=====================            -->
+<body style="background-color: darkgray;">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Project Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>       <!--used to add the hamburger icon top right icon when browser is minimized-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">       <!--used to collapse all the items on the navbar into the hamburger when browser minimized-->
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link" href="/">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Register</a>
+              </li>
+            </ul>
+            <button id="search-trigger" class="btn btn-outline-success my-2 my-sm-0 form-inline ml-auto" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+            
+            <div class="search-container" id="search-container">
+              <input type="text" placeholder="Search..." />
+              <button id="search-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+    </nav>
+
+    <div class="login-container">               <!--used to add the login form into a card form-->
+        <h2 class="text-center">Login</h2>      <!--used to add the heading of the login form-->
+        <% if (locals.message) { %>
+          <center><p style="color: red; font-weight: bold;"><%= message %></p></center>
+        <% } %>
+     
+        <form action="/login" method="POST">
+            <div class="form-group">            <!--used to add the username and password fields-->
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram-square fa-2x"></i></a>
+    </footer>
+
+    <script>
+document.getElementById('search-trigger').addEventListener('click', () => {
+  document.getElementById('search-container').classList.add('active');
+});
+
+document.getElementById('search-close').addEventListener('click', () => {
+  document.getElementById('search-container').classList.remove('active');
+});
+
+    </script>
+</body>
+
+</html>

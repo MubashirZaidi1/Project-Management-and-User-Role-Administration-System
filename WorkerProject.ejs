@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Portal</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    manager-name {
+      display: none;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+  
+      .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Worker Portal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/Worker_pages/WorkerProject">Project</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/new_sprint">New Sprint</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/worker_projects">All Projects</a>
+        </li>
+      </ul>
+    </div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>>
+  </nav>
+  
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 id="manager-name"></h1>
+    <p>This is your Worker portal where you can get a review of your past performance, current projects <br><center> and view your team members.</center></p>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a data-toggle="collapse" style="font-size: larger;" href="#project1" role="button" aria-expanded="false" aria-controls="project1">Previous Project</a>
+            </h5>
+            <div class="collapse" id="project1">
+              <p class="card-text">Here are the list of previous projects</p>
+              <ul class="list-group list-group-flush">
+                <% oProj.forEach((project) => { %>
+                  <li class="list-group-item"><a href="/project/<%= project.project_name %>"><%= project.project_name %></a></li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a data-toggle="collapse" style="font-size: larger;" href="#project2" role="button" aria-expanded="false"
+                aria-controls="project2">Current Project</a>
+            </h5>
+            <div class="collapse" id="project2">
+              <p class="card-text">These are the projects you are working on currently</p>
+              <ul class="list-group list-group-flush">
+                <% cProj.forEach((project) => { %>
+                  <li class="list-group-item"><a href="/project/<%= project.project_name %>"><%= project.project_name %></a></li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a data-toggle="collapse" style="font-size: larger;" href="#project3" role="button" aria-expanded="false" aria-controls="project3">Team View</a>
+            </h5>
+            <div class="collapse" id="project3">
+              <p class="card-text">Your Team Members</TEXtarea></p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <p data-toggle="collapse" style="font-size: larger;" role="button"  aria-controls="projectsFirst">
+                    <strong>
+                      <% if (cProj.length > 0) { %>     <!--this will access and print the name of the first project-->
+                        <p><%= cProj[0].project_name %></p>
+                    </strong>
+                        <ul>
+                        <% for (let i = 0; i < tp1.length; i++) { %>
+                          <li><%= tp1[i].username %></li>
+                        <% } %>
+                      </ul>
+                      <% } else { %>
+                        <p>No current projects found.</p>
+                      <% } %>
+                      </p>
+                  <div class="collapse" id="projectsFirst">
+                    <ul class="list-group list-group-flush">
+                      <% cProj.forEach((project) => { %>
+                        <li class="list-group-item"><%= project.project_name %></li>
+                      <% }); %>
+                    </ul>
+                      </div>
+                      <!--PRINTS DATA OF 2ND CURRENT PROJECT FROM HERE -->
+                      <p data-toggle="collapse" style="font-size: larger;" role="button"  aria-controls="projectsFirst">
+                        <strong>
+                          <% if (cProj.length > 0) { %>     <!--this will access and print the name of the first project-->
+                            <p><%= cProj[1].project_name %></p>
+                        </strong>
+                            <ul>
+                            <% for (let i = 0; i < tp2.length; i++) { %>
+                              <li><%= tp2[i].username %></li>
+                            <% } %>
+                          </ul>
+                          <% } else { %>
+                            <p>No current projects found.</p>
+                          <% } %>
+                          </p>                      
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var userName = "<%=uName %>"; // Replace with the actual manager's name
+
+      var managerNameElement = document.getElementById('manager-name');
+      managerNameElement.innerText = "Hello, " + userName;
+
+    });
+
+  </script>
+  
+ 
+
+ 
+</body>
+
+</html>

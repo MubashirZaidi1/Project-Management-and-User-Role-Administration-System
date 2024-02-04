@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .footer a {
+            color: #007bff;
+        }
+
+        .footer a:hover {               /*used to add hover effect to the baclground of the login card*/
+            color: #0056b3;
+        }
+
+
+
+        .search-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        }
+
+        .search-container.active {
+        opacity: 1;
+        visibility: visible;
+        }
+
+        .search-container input {
+        width: 80%;
+        padding: 12px;
+        font-size: 18px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: width 0.3s ease;
+        }
+
+        .search-container input:focus {
+        width: 100%;
+        outline: none;
+        }
+
+        .search-container button {
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        }
+
+        .search-container button i {
+        font-size: 24px;
+        color: #333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Project Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>       <!--used to add the hamburger icon top right icon when browser is minimized-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">       <!--used to collapse all the items on the navbar into the hamburger when browser minimized-->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+            </ul>
+            <button id="search-trigger" class="btn btn-outline-success my-2 my-sm-0 form-inline ml-auto" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+            
+            <div class="search-container" id="search-container">
+              <input type="text" placeholder="Search..." />
+              <button id="search-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+    </nav>
+    <section class="vh-100 gradient-custom" style="background-color: darkgray;">
+        <br>
+        <div class="container py-5 h-80">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-10 col-xl-9.5">
+              <div class="card shadow-2-strong card-registration mx-auto" style="border-radius: 15px; width: 55rem;">
+                <div class="card-body p-4 p-md-5">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                  <% if (foo) { %>
+                    <h4 style="color: red;"><%= foo %></h4>
+                  <% } %>
+                  
+                  <form action="/register" method="POST">
+      
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+      
+                        <div class="form-outline">
+                          <input type="text" id="fname"  name="fname" class="form-control form-control-lg" required>
+                          <label class="form-label"for="fname">Full Name</label>
+                        </div>
+      
+                      </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <input type="text" id="username" name="username" class="form-control form-control-lg" required>
+                            <label class="form-label"  for="username">Username</label>
+                            </div>
+                        </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="col-md-6 mb-4 d-flex align-items-center">
+      
+                        <div class="form-outline datepicker w-100">
+                          <input type="text" name="email" class="form-control form-control-lg" id="email" required>
+                          <label for="email" class="form-label">Email</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6 mb-4 d-flex align-items-center">
+      
+                        <div class="form-outline datepicker w-100">
+                          <input type="password" class="form-control form-control-lg" name="password" id="password" required>
+                          <label for="password"  class="form-label">Password</label>
+                        </div>
+      
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4 d-flex align-items-center">
+                            <select class="form-select" aria-label="Default select example"id="category" name="category" required>
+                                <option selected disabled>Choose one</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Worker">Employee</option>
+                                <option value="Customer">Customer</option>
+                            </select>
+                            <label class="form-label select-label" for="category" >&nbsp Select Category</label>
+                        </div>
+                        <div class="col-md-6 mb-4 d-flex align-items-center">
+                            <select class="form-select" aria-label="Default select example"id="department" name="department" required>
+                                <option selected disabled>Choose one</option>
+                                <option value=1>Marketing</option>
+                                <option value=2>Sales</option>
+                                <option value=3>Human Resources</option>
+                                <option value=4>Finance</option>
+                                <option value=5>Operations</option>
+                                <option value=6>Research and Development</option>
+                                <option value=7>Customer Service</option>
+                                <option value=8>IT</option>
+                                <option value=9>Legal</option>
+                                <option value=10>Facilities</option>
+                                <option value=11>Quality Control</option>
+                                <option value=12>Public Relations</option>
+                                <option value=13>Purchasing</option>
+                                <option value=14>Shipping & Recieving</option>
+                                <option value=15>Training and Development</option>
+                            </select>
+                            <label class="form-label select-label" for="department" >&nbsp Select Department</label>
+                        </div>
+                    </div>
+               
+      
+                    <br>
+                    <div class="row">
+                      <div class="col-12">
+      
+                        <select class="form-select" aria-label="Default select example"id="gender" name="gender" required>
+                            <option selected disabled>Choose one</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <label class="form-label select-label" for="gender" >Select Gender</label>
+      
+                      </div>
+                    </div>
+      
+                    <div class="mt-4 pt-2">
+                      <!-- <a class="btn btn-primary btn-lg" href="/" role="button">Submit</a> -->
+                      <button type="submit" class="btn btn-primary btn-lg">submit</button>
+                    </div>
+      
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>

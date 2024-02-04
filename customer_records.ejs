@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>registration</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+    
+            .login-container {
+                max-width: 400px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: white;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+            }
+    
+            .footer {
+                text-align: center;
+                padding: 15px;
+            }
+    
+            .footer a {
+                color: #007bff;
+            }
+    
+            .footer a:hover {               /*used to add hover effect to the baclground of the login card*/
+                color: #0056b3;
+            }
+    
+    
+    
+            .search-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            }
+    
+            .search-container.active {
+            opacity: 1;
+            visibility: visible;
+            }
+    
+            .search-container input {
+            width: 80%;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: width 0.3s ease;
+            }
+    
+            .search-container input:focus {
+            width: 100%;
+            outline: none;
+            }
+    
+            .search-container button {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            }
+    
+            .search-container button i {
+            font-size: 24px;
+            color: #333;
+            }
+        </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Customer Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>       <!--used to add the hamburger icon top right icon when browser is minimized-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">       <!--used to collapse all the items on the navbar into the hamburger when browser minimized-->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/customer_records">All Records</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customer_ticket">File Ticket</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+            <button id="search-trigger" class="btn btn-outline-success my-2 my-sm-0 form-inline ml-auto" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+            
+            <div class="search-container" id="search-container">
+              <input type="text" placeholder="Search..." />
+              <button id="search-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+    </nav>
+    <br>
+    <% if (data.length === 0) { %>
+      <h4>No records to show</h4>
+    <% } else {%>
+      <h2 class="text-center">All Records</h2>
+      <br>
+        <table class="table table-striped table-bordered text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Ticket ID</th>
+              <th scope="col">Category</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (i = 0; i < data.length ; i++) { %>
+            <tr>
+              <th scope="row"><%= data[i].ticket_id %></th>
+              <td><%= data[i].category %></td>
+              <td><%= data[i].project_name %></td>
+              <td><%= data[i].state %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+    <% } %>
+    
+      
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Portal</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    manager-name {
+      display: none;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+  
+      .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Manager Portal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/managerportal">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/create-project">Create Project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/delete-project">Delete Project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/create-team">Create Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/manager_projects">All Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/assign-task">Assign Task</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/delete-task">Delete Task</a>
+        </li>
+      </ul>
+    </div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>>
+  </nav>
+  
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 id="manager-name"></h1>
+    <p>This is your manager portal where you can assign projects and manage team members.</p>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a data-toggle="collapse" href="#project1" role="button" aria-expanded="false"
+                aria-controls="project1">Previous Project</a>
+            </h5>
+            <div class="collapse" id="project1">
+              <p class="card-text">Here are the list of previous projects:</p>
+              <ul class="list-group list-group-flush">
+                <% Cprojects.forEach(project => { %>
+                  <li class="list-group-item">
+                    <a href="/project/<%= project.project_name %>"><%= project.project_name %></a>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a data-toggle="collapse" href="#project2" role="button" aria-expanded="false" aria-controls="project2">Current Project</a>
+            </h5>
+            <div class="collapse" id="project2">
+              <p class="card-text">Here are current projects:</p>
+              <ul class="list-group list-group-flush">
+                <% projects.forEach(project => { %>
+                  <li class="list-group-item"><a href="/incompproject/<%= project.project_name %>"><%= project.project_name %></a></li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a class="collapsed" data-toggle="collapse" href="#project3" role="button" aria-expanded="false"
+                aria-controls="project3" onclick="toggleCollapse(this)">Team View</a>
+            </h5>
+            <div class="collapse" id="project3">
+              <div class="card-text">Here are team members:</div>
+              <ul class="list-group list-group-flush">
+                <% workers.forEach((worker, index) => { %>
+                  <li class="list-group-item">
+                    <a href="/worker/<%= encodeURIComponent(worker) %>"><%= worker %></a>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+     
+
+
+
+
+            
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Add the following script at the bottom of the HTML -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var managerName = '<%= managerName %>'; // Replace with the actual manager's name
+
+      var managerNameElement = document.getElementById('manager-name');
+      managerNameElement.innerText = "Hello, Manager " + managerName;
+
+    });
+</script>
+  <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+ 
+
+ 
+</body>
+
+</html>
